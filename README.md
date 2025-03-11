@@ -33,7 +33,7 @@ pip install -r requirements.txt
 Process a portfolio file with default settings:
 
 ```bash
-python process_citrini.py path/to/portfolio
+python process_citrini.py path/to/portfolio.xlsx
 ```
 
 ### Command Line Options
@@ -41,12 +41,12 @@ python process_citrini.py path/to/portfolio
 The script supports several options:
 
 ```
-python process_citrini.py portfolio.process_citrini [options]
+python process_citrini.py portfolio.xlsx [options]
 ```
 
 Options:
 - `--net-investment AMOUNT`: Total capital to allocate (long - short). Default: 1,000,000
-- `--output-file FILENAME`: Output Excel file. Default: "schwab_orders.process_citrini"
+- `--output-file FILENAME`: Output Excel file. Default: "schwab_orders.xlsx"
 - `--min-allocation AMOUNT`: Minimum allocation in USD. Default: 0
 - `--round-up`: Round up share quantities (default: True)
 - `--use-delta`: Use Delta Adj Wgt column if available (default: False)
@@ -54,19 +54,26 @@ Options:
 - `--no-us-only`: Include non-US stocks
 - `--find-us-replacements`: Try to find US replacements for non-US stocks (default: False)
 - `--update-prices`: Fetch current market prices for tickers (default: False)
+- `--current-portfolio FILE`: Path to Excel file with current holdings for calculating net orders
 
 ### Examples
 
 Allocate $5 million net investment with a minimum allocation of $10,000:
 
 ```bash
-python process_citrini.py portfolio.process_citrini --net-investment 5000000 --min-allocation 10000
+python process_citrini.py portfolio.xlsx --net-investment 5000000 --min-allocation 10000
 ```
 
 Include non-US stocks and try to find US replacements:
 
 ```bash
-python process_citrini.py portfolio.process_citrini --no-us-only --find-us-replacements
+python process_citrini.py portfolio.xlsx --no-us-only --find-us-replacements
+```
+
+Calculate net orders by comparing with current holdings:
+
+```bash
+python process_citrini.py portfolio.xlsx --current-portfolio current_holdings.xlsx
 ```
 
 ## Output Files
@@ -97,4 +104,4 @@ This ensures that the dollar allocations correctly reflect the specified weights
 
 ## License
 
-MIT 
+MIT
